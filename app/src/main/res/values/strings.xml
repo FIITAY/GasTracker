@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Gas Tracker</string>
+    <string name="title_home">Dashboard</string>
+    <string name="title_dashboard">Enteries</string>
+    <string name="title_add">Add</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>
