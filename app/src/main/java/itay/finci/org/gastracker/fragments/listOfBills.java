@@ -88,11 +88,11 @@ class StableArrayAdapter extends ArrayAdapter<Bill> {
 
         Bill b = getItem(position);
 
-        tvPrice.setText(Double.toString(b.getPrice()));
+        tvPrice.setText(" " + Double.toString(b.getPrice()));
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-        tvDate.setText(" "+df.format(b.getDate()));
-        tvKm.setText(Double.toString(b.getKilometers()));
-        tvLiters.setText(Double.toString(b.getLiters()));
+        tvDate.setText(" " + df.format(b.getDate()));
+        tvKm.setText(" "+ Double.toString(b.getKilometers()));
+        tvLiters.setText(" "+ Double.toString(b.getLiters()));
 
         return rowView;
     }
