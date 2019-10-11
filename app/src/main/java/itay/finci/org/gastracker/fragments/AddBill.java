@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import itay.finci.org.gastracker.Bill.Bill;
@@ -53,10 +55,15 @@ public class AddBill extends Fragment {
                     double liters = Double.parseDouble(etLiters.getText().toString());
                     double km     = Double.parseDouble(etKm.getText().toString());
                     Date bought;
-                    try {
-                        bought = new Date(etDate.getText().toString());
-                    }catch(Exception e){
-                        bought = new Date();
+                    if(!etDate.getText().toString().isEmpty()) {
+                        try {
+                            DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+                            bought = df.parse(etDate.getText().toString());
+                        } catch (Exception e) {
+                            bought = new Date(); //error so the date is today
+                        }
+                    }else{
+                        bought = new Date(); // the date is today because empty field
                     }
                     Bill bill = new Bill(price, liters, km, bought);
                     BillList.getInstance().add(bill);

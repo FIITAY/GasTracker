@@ -33,7 +33,6 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="date"
-        android:inputType="date"
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="232dp" />
 

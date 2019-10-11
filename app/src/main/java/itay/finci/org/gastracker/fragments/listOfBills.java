@@ -12,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -87,7 +89,8 @@ class StableArrayAdapter extends ArrayAdapter<Bill> {
         Bill b = getItem(position);
 
         tvPrice.setText(Double.toString(b.getPrice()));
-        tvDate.setText(""+b.getDate().getDay()+"/"+b.getDate().getMonth()+"/"+b.getDate().getYear());
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        tvDate.setText(" "+df.format(b.getDate()));
         tvKm.setText(Double.toString(b.getKilometers()));
         tvLiters.setText(Double.toString(b.getLiters()));
 
