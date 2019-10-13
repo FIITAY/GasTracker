@@ -35,12 +35,18 @@ public class Summery extends Fragment {
         // Inflate the layout for this fragment
         View root =  inflater.inflate(R.layout.fragment_summery, container, false);
 
+        //finds the text view
         TextView tvPaid = (TextView) root.findViewById(R.id.tvPaid);
+        //get the list of bills
         ArrayList<Bill> bills = BillList.getInstance().getList();
+        //make object of todays date
         Date today = new Date();
+        //will count the sum of money paid
         int paidSum = 0;
+        //formats to get the month / year of specific date
         DateFormat findMouth = new SimpleDateFormat("MM");
         DateFormat findYear = new SimpleDateFormat("yyyy");
+        //go over each bill in the list
         for(Bill b : bills){
             if(findMouth.format(today).equals(findMouth.format(b.getDate())) && //check same month
                findYear.format(today).equals(findYear.format(b.getDate())) ){ //check same year
@@ -48,6 +54,7 @@ public class Summery extends Fragment {
                 paidSum += b.getPrice();
             }
         }
+        //set the text of the text view to the sum
         tvPaid.setText(" "+paidSum+" NIS");
         //return the view
         return root;

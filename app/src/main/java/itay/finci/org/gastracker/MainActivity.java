@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         Summery s = new Summery();
         replaceFragment(s);
 
+        //finds the BottomNavigationView a and add the navigation listiner
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }

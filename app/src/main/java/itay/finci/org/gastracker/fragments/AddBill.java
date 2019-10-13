@@ -51,12 +51,13 @@ public class AddBill extends Fragment {
             @Override
             public void onClick(View view) {
                 try {
+                    //gets the data from the edit text fields
                     double price  = Double.parseDouble(etPrice.getText().toString());
                     double liters = Double.parseDouble(etLiters.getText().toString());
                     double km     = Double.parseDouble(etKm.getText().toString());
                     Date bought;
                     if(!etDate.getText().toString().isEmpty()) {
-                        try {
+                        try { //try to parse the date given in the edit text
                             DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
                             bought = df.parse(etDate.getText().toString());
                         } catch (Exception e) {
@@ -65,7 +66,9 @@ public class AddBill extends Fragment {
                     }else{
                         bought = new Date(); // the date is today because empty field
                     }
+                    //make a new bill with the data given
                     Bill bill = new Bill(price, liters, km, bought);
+                    //add the new bill
                     BillList.getInstance().add(bill);
                     //get back to the summery screen
                     Summery s = new Summery();
@@ -74,7 +77,7 @@ public class AddBill extends Fragment {
                     ft.detach(s);
                     ft.attach(s);
                     ft.commit();
-                }catch(Exception e){
+                }catch(Exception e){//error in getting the new bill, show error message
                     e.printStackTrace();
                     Toast.makeText(getActivity().getApplicationContext(),
                             "Error while proccessing the data", Toast.LENGTH_LONG).show();
