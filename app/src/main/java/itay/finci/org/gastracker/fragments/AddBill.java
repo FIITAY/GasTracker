@@ -28,10 +28,16 @@ public class AddBill extends Fragment {
 
     public AddBill() {
         // Required empty public constructor
+        position = -1;
+    }
+
+    public AddBill(int position){
+        this.position = position;
     }
 
     Button btSubmit;
     EditText etPrice, etLiters, etKm, etDate;
+    int position;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -45,6 +51,16 @@ public class AddBill extends Fragment {
         etLiters = (EditText) root.findViewById(R.id.etLiters);
         etKm     = (EditText) root.findViewById(R.id.etKm);
         etDate   = (EditText) root.findViewById(R.id.etDate);
+
+        //if have position load the data
+        if(position != -1){
+            Bill b = BillList.getInstance().get(position);
+            etPrice.setText(""+b.getPrice());
+            DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+            etDate.setText(""+df.format(b.getDate()));
+            etKm.setText(""+b.getKilometers());
+            etLiters.setText(""+b.getLiters());
+        }
 
         //get click listiner for btSubmit
         btSubmit.setOnClickListener(new View.OnClickListener() {
@@ -68,8 +84,13 @@ public class AddBill extends Fragment {
                     }
                     //make a new bill with the data given
                     Bill bill = new Bill(price, liters, km, bought);
-                    //add the new bill
-                    BillList.getInstance().add(bill);
+                    if(position == -1){
+                        //add the new bill
+                        BillList.getInstance().add(bill);
+                    }else {
+                        //edit mode
+                        BillList.getInstance().set(bill,position);//make the position equal to the new bill
+                    }
                     //get back to the summery screen
                     Summery s = new Summery();
                     FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction()

@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
@@ -60,7 +62,7 @@ public class listOfBills extends Fragment {
         listView.setAdapter(adapter);
 
         //add support for swiping items left/right
-        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipeManager(adapter));
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipeManager(adapter, getContext()));
         itemTouchHelper.attachToRecyclerView(listView);
 
         return root;
@@ -195,10 +197,12 @@ class StableArrayAdapter extends RecyclerView.Adapter<StableArrayAdapter.MyViewH
  */
 class SwipeManager extends ItemTouchHelper.SimpleCallback{
     private StableArrayAdapter mAdapter;
+    private Context context;
 
-    public SwipeManager(StableArrayAdapter mAdapter){
+    public SwipeManager(StableArrayAdapter mAdapter, Context c){
         super(0,ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT);
         this.mAdapter = mAdapter;
+        this.context = c;
     }
 
     @Override
@@ -210,6 +214,12 @@ class SwipeManager extends ItemTouchHelper.SimpleCallback{
                 break;
             case ItemTouchHelper.LEFT:
                 //item swiped to the left- edit the item
+                AddBill ab = new AddBill(viewHolder.getAdapterPosition());
+                FragmentTransaction ft = ((FragmentActivity) context).getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.content, ab, null);
+                ft.detach(ab);
+                ft.attach(ab);
+                ft.commit();
                 break;
         }
     }

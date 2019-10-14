@@ -19,6 +19,15 @@ public class BillList {
         list.add(b);
     }
 
+    public Bill get(int position){
+        return list.get(position);
+    }
+
+    public void set(Bill b, int position){
+        list.remove(position); //removes the previous bill
+        list.add(position, b); //adds the new bill in the same position
+    }
+
     public ArrayList<Bill> getList() {
         return list;
     }
