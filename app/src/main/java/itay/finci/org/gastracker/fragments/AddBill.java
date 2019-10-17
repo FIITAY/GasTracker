@@ -91,6 +91,11 @@ public class AddBill extends Fragment {
                         //edit mode
                         BillList.getInstance().set(bill,position);//make the position equal to the new bill
                     }
+                    //fixing problem
+                    etPrice = null;
+                    etLiters = null;
+                    etKm = null;
+                    etDate = null;
                     //get back to the summery screen
                     Summery s = new Summery();
                     FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction()

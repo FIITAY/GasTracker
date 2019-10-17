@@ -41,7 +41,7 @@ public class listOfBills extends Fragment {
     }
 
     RecyclerView listView;
-    LinearLayoutManager layoutManager;;
+    LinearLayoutManager layoutManager;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -104,6 +104,7 @@ class StableArrayAdapter extends RecyclerView.Adapter<StableArrayAdapter.MyViewH
      * constructor
      * @param objects the ArrayList of the objects
      * @param context the application context
+     * @param activity the activity that it runs inside
      */
     public StableArrayAdapter(ArrayList<Bill> objects, Context context, Activity activity){
         arrayList = objects;

@@ -1,21 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="match_parent"
+    android:id="@+id/coordinatorLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".fragments.Summery">
 
 
-    <TextView
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="payed this mounth:" />
+        android:scrollbars="vertical"
+        android:paddingBottom="?attr/actionBarSize"
+        />
 
-    <TextView
-        android:id="@+id/tvPaid"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView" />
-
-
-</LinearLayout>
+</android.support.design.widget.CoordinatorLayout>
