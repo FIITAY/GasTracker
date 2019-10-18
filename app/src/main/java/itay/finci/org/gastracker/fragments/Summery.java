@@ -206,6 +206,8 @@ class SimpleAdapter extends RecyclerView.Adapter<SimpleAdapter.ViewHolder>{
         //change the color of the background if th km/liters is less then avg
         if(sumKm/sumLiters > km/liters){
             holder.llColor.setBackgroundColor(ContextCompat.getColor(mContext, R.color.red));
+        }else{
+            holder.llColor.setBackgroundColor(ContextCompat.getColor(mContext, R.color.green));
         }
     }
 
