@@ -1,6 +1,7 @@
 package itay.finci.org.gastracker.fragments;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -11,12 +12,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.concurrent.ExecutionException;
 
 import itay.finci.org.gastracker.Bill.Bill;
 import itay.finci.org.gastracker.Bill.BillList;
+import itay.finci.org.gastracker.MainActivity;
 import itay.finci.org.gastracker.R;
 
 
@@ -91,11 +97,8 @@ public class AddBill extends Fragment {
                         //edit mode
                         BillList.getInstance().set(bill,position);//make the position equal to the new bill
                     }
-                    //fixing problem
-                    etPrice = null;
-                    etLiters = null;
-                    etKm = null;
-                    etDate = null;
+                    //re write the bill list in to a file
+                    wirteToFile(getContext());
                     //get back to the summery screen
                     Summery s = new Summery();
                     FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction()
@@ -113,6 +116,20 @@ public class AddBill extends Fragment {
 
         //returns view
         return root;
+    }
+
+    private void wirteToFile(Context context){
+        context.deleteFile(MainActivity.FILE_NAME);
+        File file = new File(context.getFilesDir(), MainActivity.FILE_NAME);
+        FileOutputStream fos;
+        try {
+            fos = context.openFileOutput(MainActivity.FILE_NAME, Context.MODE_PRIVATE);
+            String out = BillList.getInstance().getInstance().toString();
+            fos.write(out.getBytes());
+            fos.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
 }

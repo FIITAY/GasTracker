@@ -1,7 +1,13 @@
 package itay.finci.org.gastracker.Bill;
 
 
+import android.media.MediaPlayer;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Scanner;
+import java.util.concurrent.ExecutionException;
 
 public class Bill {
     private double price;
@@ -25,6 +31,19 @@ public class Bill {
         this.price = price;
         this.liters = liters;
         this.kilometers = kilometers;
+    }
+
+    public Bill(String row){
+        Scanner s = new Scanner(row);
+        this.price = s.nextDouble();
+        this.kilometers = s.nextDouble();
+        this.liters = s.nextDouble();
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            date = df.parse(s.next());
+        }catch (Exception e){
+            date = new Date();
+        }
     }
 
     public double getPrice() {
@@ -57,6 +76,12 @@ public class Bill {
 
     public void setLiters(double liters) {
         this.liters = liters;
+    }
+
+    @Override
+    public String toString(){
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        return ""+price+" "+kilometers+" "+liters+" "+df.format(date);
     }
 
 
