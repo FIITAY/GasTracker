@@ -1,10 +1,14 @@
 package itay.finci.org.gastracker.fragments;
 
 
+import android.Manifest;
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -120,10 +124,21 @@ public class AddBill extends Fragment {
 
     private void wirteToFile(Context context){
         context.deleteFile(MainActivity.FILE_NAME);
-        File file = new File(context.getFilesDir(), MainActivity.FILE_NAME);
         FileOutputStream fos;
         try {
             fos = context.openFileOutput(MainActivity.FILE_NAME, Context.MODE_PRIVATE);
+            String out = BillList.getInstance().getInstance().toString();
+            fos.write(out.getBytes());
+            fos.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        //make beckup file
+        File backup = new File(context.getExternalFilesDir(null) +"/" +MainActivity.FILE_NAME);
+        Log.e("FILE:",""+context.getExternalFilesDir(null) +"/" +MainActivity.FILE_NAME);
+        backup.delete();
+        try {
+            fos = new FileOutputStream(context.getExternalFilesDir(null) +"/" +MainActivity.FILE_NAME);
             String out = BillList.getInstance().getInstance().toString();
             fos.write(out.getBytes());
             fos.close();

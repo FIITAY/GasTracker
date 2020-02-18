@@ -77,8 +77,18 @@ public class BillList {
             if(row.isEmpty()){
                 continue;
             }else{
-                add(new Bill(row));//make new bill from this data
+                Bill newB= new Bill(row);
+                if(!dateExsist(newB))
+                    add(newB);//make new bill from this data
             }
         }
+    }
+
+    private boolean dateExsist(Bill b){
+        for (Bill existing: list) {
+            if(existing.getDate().equals(b.getDate()))
+                return true;
+        }
+        return false;
     }
 }

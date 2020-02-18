@@ -68,7 +68,6 @@ public class MainActivity extends AppCompatActivity {
         try {
             InputStream fis = context.openFileInput(MainActivity.FILE_NAME);
             if(fis != null){
-                //found the file- do a read
                 InputStreamReader inputStreamReader = new InputStreamReader(fis);
                 BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
                 String receiveString = "";
@@ -102,5 +101,4 @@ public class MainActivity extends AppCompatActivity {
         ft.attach(fragment);
         ft.commit();
     }
-
 }
